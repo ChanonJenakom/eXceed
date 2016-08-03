@@ -2,27 +2,31 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>S.F.A.S - Login</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="./login.css">
     <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
 </head>
 
 <body>
-  <div>
-    <h1><center>Smart Fire Alarm System<br /><br /><br /><br />Login</center></h1>
-    <center>
+  <div class="container">
+    <div class="header">
+      <h1 class="header-text">Smart Fire</h1>
+      <h1 class="header-text">Alarm System</h1>
+    </div>
+    <h2 class="header-login">Please Login</h3>
       <form id="login">
-        <label>Username <input type="text" id="userid" placeholder="name@email.com"/><br /></label>
-        <label>Password <input type="password" id="password" placeholder="password" /><br /></label>
-        <input type="button" onclick="check(this.form)" value="Login" />
-        <input type="reset" value="Cancel" />
+        <input type="text" class="form-control input-from" id="userid" placeholder="name@email.com"/>
+        <input type="password" class="form-control input-from" id="password" placeholder="password" />
+        <input type="button" class="btn btn-info btn-block btn-lg btn-first" onclick="check(this.form)" value="Login" />
+        <input type="reset" class="btn btn-default btn-block btn-lg"value="Cancel" />
       </form>
-    </center>
   </div>
 
   <script type='text/javascript'>
