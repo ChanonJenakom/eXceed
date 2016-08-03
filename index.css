@@ -17,6 +17,9 @@ td, th {
     text-align: left;
     padding: 8px;
 }
+#red {
+    background-color: #c0392b;
+}
 tr{
     background-color:#242424;
     color:  #ffffff
@@ -70,4 +73,14 @@ h3{
     height:20px;
     width:35%;
     border:1px solid red;
+}
+#one{
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#two{
+  color: #ffffff
+}
+p{
+  color:#ffffff
 }
