@@ -182,8 +182,11 @@
     }
     function sendToHW() {
       $.ajax({
-        url: 'http://10.32.176.4/xplusequal13/Bangkok'
-      });
+        url: 'http://10.32.176.4/xplusequal13/test'
+      })
+      .success(function() {
+        console.log('send data to HW success');
+      })
     }
     function getFirstData() {
       $.ajax({
