@@ -48,7 +48,6 @@
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
       <li data-target="#myCarousel" data-slide-to="1"></li>
       <li data-target="#myCarousel" data-slide-to="2"></li>
-      <li data-target="#myCarousel" data-slide-to="3"></li>
     </ol>
 <!-- seach-->
 <br>
@@ -69,7 +68,7 @@
                   <th>LOCATION</th>
                   <th>TEMPERATURE</th>
                   <th>HUMIDITY</th>
-                  <th>CROWDNESS</th>
+                  <th>CROWDEDNESS</th>
                   <th>INFO</th>
                   <th>ALERT</th>
                 </tr>
@@ -85,9 +84,9 @@
 		<div class="col-md-12">
 			<div class="row">
 				<div class="col-md-4">
-					<div class="thumbnail">
+					<div class="thumbnail"id="one">
 						<img alt="Bootstrap Thumbnail First" src="http://www.newage-uae.com/images/fire_banner.jpg" />
-						<div class="caption">
+						<div class="caption"id="two">
 							<h3>
 								False alarms kill
 							</h3>
@@ -98,9 +97,9 @@
 					</div>
 				</div>
 				<div class="col-md-4">
-					<div class="thumbnail">
+					<div class="thumbnail"id="one">
 						<img alt="Bootstrap Thumbnail Second" src="http://noblefiretech.com/online/wp-content/uploads/2015/11/Slide-1.jpg" />
-						<div class="caption">
+						<div class="caption"id="two">
 							<h3>
 								Don’t play with fire
 							</h3>
@@ -111,9 +110,9 @@
 					</div>
 				</div>
 				<div class="col-md-4">
-					<div class="thumbnail">
+					<div class="thumbnail"id="one">
 						<img alt="Bootstrap Thumbnail Third" src="http://www.safetyservicescompany.com/wp-content/uploads/2013/10/Fire-Prevention-Week-2013.png" />
-						<div class="caption">
+						<div class="caption"id="two">
 							<h3>
 								Don't just leave to do something else
 							</h3>
@@ -139,7 +138,7 @@
   </div>
 
   <div class="item">
-    <img src="head1.png" alt="Flower" width="460" height="345">
+    <img src="head3.png" alt="Flower" width="460" height="345">
   </div>
 
 <!-- Left and right controls -->
@@ -166,13 +165,14 @@
 
     function updateTable() {
       var row = $('<tr></tr>');
+      if (computeDanger(smoke[smoke.length - 1])) row = $('<tr id="red"></tr>')
       var col1 = $('<td>' + place[place.length - 1] + '</td>');
       var col2 = $('<td>' + temp[temp.length - 1] + '</td>');
       var col3 = $('<td>' + humidity[humidity.length - 1] + '</td>');
       var col4 = $('<td>' + people[people.length - 1] + '</td>');
       var col5 = $('<td><button type="button" class="btn btn-danger btn-sm">SHOW</button></td>');
       var col6 = $('<td>SAFE</td>');
-      if (computeDanger(people[people.length - 1])) col6 = $('<td><button type="button" class="btn btn-danger btn-sm">ALERT</button></td>');
+      if (computeDanger(smoke[smoke.length - 1])) col6 = $('<td><button type="button" class="btn btn-danger btn-sm">ALERT</button></td>');
       $('#thead').after(row.append(col1, col2, col3, col4, col5, col6));
     }
 
@@ -185,8 +185,23 @@
       })
     }
 
-    function computeDanger(people) {
-      return people == 'High' ? true : false;
+    function computeDanger(smoke) {
+      return smoke > 50 ? true : false;
+    }
+
+    function alertFire() {
+      $.ajax({
+        url: 'http://10.32.176.4/x+=13/' + 'notified/set'
+      })
+      .success(function(data) {
+        getInfo();
+        if (computeDanger(information[4]) && data !== 'notified') {
+          $.ajax({
+            url: 'http://10.32.176.4/x+=13/' + 'notified/set'
+          })
+          updateHistoryLog();
+        }
+      })
     }
 
     function updateHistoryLog() {
@@ -198,10 +213,21 @@
       smoke.push(information[4]);
       gas.push(information[5]);
       if (place[place.length - 1] !== undefined) updateTable();
+      $.ajax({
+        url: 'http://10.32.176.4/x+=13/' + 'notified/set'
+      })
+      .success(function(data) {
+        getInfo();
+        if (data == 'notified') {
+          $.ajax({
+            url: 'http://10.32.176.4/x+=13/' + 'not notified/set'
+          })
+        }
+      })
     }
 
-    setInterval(computeDanger, 1500)
-    setInterval(updateHistoryLog, 3000)
+    setInterval(alertFire, 1500)
+    setInterval(updateHistoryLog, 30000)
   </script>
 </body>
 
