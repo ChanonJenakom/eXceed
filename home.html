@@ -171,10 +171,14 @@
       var col2 = $('<td>' + temp[temp.length - 1] + '</td>');
       var col3 = $('<td>' + humidity[humidity.length - 1] + '</td>');
       var col4 = $('<td>' + people[people.length - 1] + '</td>');
-      var col5 = $('<td><button type="button" class="btn btn-danger btn-sm">SHOW</button></td>');
+      var col5 = $('<td><button type="button" class="btn btn-danger btn-sm btn-show-'+c+'">SHOW</button></td>');
       var col6 = $('<td>SAFE</td>');
-      if (computeDanger(people[people.length - 1])) col6 = $('<td><button type="button" class="btn btn-danger btn-sm">ALERT</button></td>');
+      if (computeDanger(people[people.length - 1])) col6 = $('<td><button type="button" class="btn btn-danger btn-sm ">ALERT</button></td>');
       $('#thead').after(row.append(col1, col2, col3, col4, col5, col6));
+      $('.btn-show-'+c).on('click', function() {
+        window.location.replace('everyday.html');
+        window.close();
+      });
     }
     function getFirstData() {
       $.ajax({
