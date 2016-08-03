@@ -189,20 +189,20 @@
       return smoke > 50 ? true : false;
     }
 
-    function alertFire() {
-      $.ajax({
-        url: 'http://10.32.176.4/x+=13/' + 'notified/set'
-      })
-      .success(function(data) {
-        getInfo();
-        if (computeDanger(information[4]) && data !== 'notified') {
-          $.ajax({
-            url: 'http://10.32.176.4/x+=13/' + 'notified/set'
-          })
-          updateHistoryLog();
-        }
-      })
-    }
+    // function alertFire() {
+    //   $.ajax({
+    //     url: 'http://10.32.176.4/x+=13/' + 'notified/set'
+    //   })
+    //   .success(function(data) {
+    //     getInfo();
+    //     if (computeDanger(information[4]) && data !== 'notified') {
+    //       $.ajax({
+    //         url: 'http://10.32.176.4/x+=13/' + 'notified/set'
+    //       })
+    //       updateHistoryLog();
+    //     }
+    //   })
+    // }
 
     function updateHistoryLog() {
       getInfo();
@@ -213,21 +213,21 @@
       smoke.push(information[4]);
       gas.push(information[5]);
       if (place[place.length - 1] !== undefined) updateTable();
-      $.ajax({
-        url: 'http://10.32.176.4/x+=13/' + 'notified/set'
-      })
-      .success(function(data) {
-        getInfo();
-        if (data == 'notified') {
-          $.ajax({
-            url: 'http://10.32.176.4/x+=13/' + 'not notified/set'
-          })
-        }
-      })
+      // $.ajax({
+      //   url: 'http://10.32.176.4/x+=13/' + 'notified/set'
+      // })
+      // .success(function(data) {
+      //   getInfo();
+      //   if (data == 'notified') {
+      //     $.ajax({
+      //       url: 'http://10.32.176.4/x+=13/' + 'not notified/set'
+      //     })
+      //   }
+      // })
     }
 
-    setInterval(alertFire, 1500)
-    setInterval(updateHistoryLog, 30000)
+    // setInterval(alertFire, 1500)
+    setInterval(updateHistoryLog, 1000)
   </script>
 </body>
 
