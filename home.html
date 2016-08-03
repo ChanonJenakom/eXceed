@@ -177,11 +177,9 @@
       })
       .success(function(data) {
         allData = data.split('*');
-        console.log(allData);
         allData.map(function(d) {
           information = d.split(',');
           if(information[0] === "") information.shift();
-          console.log(information);
           place.push(information[0]);
           temp.push(information[1]);
           people.push(information[2]);
@@ -198,7 +196,7 @@
         url: 'http://10.32.176.4/xplusequal13'
       })
       .success(function(data) {
-        if(allData.length >= 10) {
+        if(allData.length >= 30) {
           allData.shift();
         }
         allData.push(data+'*');
