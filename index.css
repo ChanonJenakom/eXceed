@@ -10,11 +10,10 @@ table {
     background-color:  #f4a09c;
 }
 td {
-  text-indent: 7px;
+    text-indent: 7px;
 }
 td, th {
     border: 1px solid;
-
     text-align: left;
     padding: 8px;
 }
